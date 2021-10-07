@@ -1,0 +1,37 @@
+{% extends 'App_Login/navbar.html' %}
+{% load crispy_forms_tags %}
+{% block title_block %} SignUp {% endblock %}
+{% block body_block %}
+{% if registered %}
+    <div class="alert alert-success">
+        Account created successfully <a href="">Login Here!</a>
+    </div>
+{% else %}
+    <div class="signup text-dark">
+        <div class="row">
+            <div class="col-lg-5 text-center" style="margin-top: 120px;">
+                <div class="header-content text-light">
+                    <h1>What is a Blog Website?</h1>
+                    <p class="lead">“Blog” is an abbreviated version of “weblog,” which is a term used to describe websites that maintain an ongoing chronicle of information. A blog features diary-type commentary and links to articles on other websites, usually presented as a list of entries in reverse chronological order. Blogs range from the personal to the political, and can focus on one narrow subject or a whole range of subjects.</p>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="form-container mx-3">
+                    <h1 class="text-center">Create New Account</h1>
+            
+                    <form action="" method="POST" >
+                        {{form|crispy}}
+                        {% csrf_token %}
+                        <input type="submit" value="Create Account" class="btn btn-success btn-md mx-auto" >
+                    </form>
+                    <br>
+                    <p>Already have an account? <a href="{% url 'App_Login:Login' %}">Login Here!</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+   
+
+{% endblock %}

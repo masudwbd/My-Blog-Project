@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title_block %} Profile {% endblock %}
+{% block body_block %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <h3 class="my-5 ml-5" style="color: #f60;">Username : {{user.username}}</h3>
+            <div class="profile d-flex">
+                <div class="profile-img text-center">
+                    {% if user.user_profile %}
+                    <img src="/media/{{user.user_profile.profile_pic}}"class="rounded-circle" style="height: 200px;" alt="">
+                    {% else %}
+                    <img src="/media/profile_pics/76729750.jpg" class="rounded-circle" style="height: 200px;" alt="">
+                    {% endif %}
+                    <a href="{% url 'App_Login:AddProPic' %}" class="btn btn-info btn-sm mt-3">Change Profile Picture</a>
+                    <h6 class="mt-4 text-center">পূর্ণ মাপ দেখুন</h6>
+                    <div class="profile-links mt-4">
+                        <p>আমার সাথে যোগাযোগ করুন</p>
+                        <a class="pt-4" href="" style="color: #00838f;">ইমেল</a>
+                        <br>
+                        <a class="pt-4" href="" style="color: #00838f;">আমার ওয়েব পৃষ্ঠা</a>
+                        <p class="mt-3">এই সময় থেকে Blogger এ আগস্ট ২০১৫</p>
+                        <p>প্রোফাইল দৃশ্য - 3913</p>
+                    </div>
+                </div>
+                <div class="profile-blogs ml-5">
+                    <h3>আমার ব্লগগুলি</h3>
+                    <p>Kate</p>
+                    <p>OmKit</p>
+                    <p>Jannify</p>
+                    <p>EventMag</p>
+                    <hr>
+                    <h3 class="mt-4">আমার সম্পর্কে</h3>
+                    <div class="profile-info">
+                        <p>লিঙ্গ : Male</p>
+                        <p>শিল্প : Internet</p>
+                        <p>পেশা : Blogger template designer</p>
+                        <p>লোকেশন : Mumbai, Maharashtra, ভারত</p>
+                        <p>সূচনা : SoraBloggingTips Is A Site Where You Find Unique And High-Quality Professional Blogger Templates For Free.</p>
+                        <p>আগ্রহসমূহ : Blogger, Blogger Template, Blogger Theme, Blogspot Theme</p>
+                    </div>
+                </div>
+            </div>
+            <h3 class="text-center mt-4"><a class="btn btn-info" href="{% url 'App_Login:UserChange' %}">Change your profile Info</a></h3>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

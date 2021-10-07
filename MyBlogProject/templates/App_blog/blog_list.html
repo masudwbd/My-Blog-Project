@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% block title_block %} Home {% endblock %}
+{% block body_block %}
+        <div id="main-blog-page">
+            <div class="blog-contain">
+                <div class="blog-header">
+                    <div class="blog-header-content text-center text-light">
+                        <h1 class="font-weight-bold">Thoughts, stories and ideas.</h1>
+                        <p class="mt-5 mb-4">Minimal and modern theme for Blogspot. Use it for personal blog or multi-author blog / magazine.</p>
+                        <button class="btn btn-info">Read More</button>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="blogs mt-3">
+                    <div class="row">
+                        {% for blog in latest_blogs %}
+                            <div class="col-lg-6 col-md-6">
+                                <div class="blog-image mx-auto" style="
+                                background-image: url('/media/{{blog.blog_image}}');
+                                height: 400px;
+                                width: 100%;
+                                background-position: center center;
+                                background-repeat: no-repeat;
+                            ">
+                                    <div class="overlay-card text-light text-center font-weight-bold">
+                                        <div class="blog-details">
+                                            <a href="{% url 'App_Blog:BlogDetails' slug=blog.slug%}" style="text-decoration:none;"><h4 class="text-light">{{blog.blog_title}}</h4></a>
+                                            <a href="{% url 'App_Login:Profile' %}" style="text-decoration: none;"><span style="color: #fff;" class="mr-1"><i class="fas fa-user mr-1"></i>{{blog.author}}</span> </a><span style="color: #fff;"><i class="far fa-clock"></i>{{blog.published}}</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="all-blogs mt-4">
+                        <div class="row">
+                            <div class="col-lg-8 col-md-12">
+                                <div class="row">
+                                        {% for blog in paginated_blogs %}
+                                        <div class="col-lg-6 col-md-6 text-center p-2">
+                                            <div class="card" style="height:380px">
+                                                <a href=""><img class="card-img-top" src="/media/{{blog.blog_image}}" style="height: 225px;" alt=""></a>
+                                                <div class="card-body">
+                                                    <a href="{% url 'App_Blog:BlogDetails' slug=blog.slug%}" style="text-decoration: none;"><h5 class=" text-dark">{{blog.blog_title}}</h5></a>
+                                                    <hr>
+                                                    <a href="{% url 'App_Login:Profile' %}" style="text-decoration: none;"><span style="color: #aaa;" class="mr-2"><i class="fas fa-user mr-2"></i>{{blog.author}}</span> </a>  <span style="color: #aaa;"><i class="far fa-clock mr-1"></i>{{blog.published}}</span>
+                                                </div>
+                                              </div>
+                                        </div>
+                                        {% endfor %}
+                                </div>
+                                <div class="more-posts text-center my-3">
+                                    <!-- {{paginated_blogs}}
+                                    Has Previous: {{paginated_blogs.has_previous}}
+                                    Has Next: {{paginated_blogs.has_next}}
+                                    Current_page: {{paginated_blogs.number}}
+                                    number of pages: {{paginated_blogs.paginator.num_pages}} -->
+                                    {% if paginated_blogs.has_previous %}
+                                        <a href="?page=1">&laquo First</a>
+                                        <a href="?page={{paginated_blogs.previous_page_number}}">Previous</a>
+                                    {% endif %}
+                                        Page {{paginated_blogs.number}} of {{paginated_blogs.paginator.num_pages}}
+                                    {% if paginated_blogs.has_next %}
+                                         <a href="?page={{paginated_blogs.next_page_number}}">Next</a>
+                                         <a href="?page={{paginated_blogs.paginator.num_pages}}">Last &raquo;</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-12 mt-2">
+                                <div class="social-networks  text-center">
+                                    <h5 class="font-weight-bold" style="color: #19ddc4;">Social Plugin</h5>
+                                    <hr>
+                                    <div class="icons">
+                                        <i class="fab fa-facebook icon" style="background-color:#3b5999 ;"></i>
+                                        <i class="fab fa-twitter icon" style="background-color:#00acee ;"></i>
+                                        <i class="fab fa-linkedin icon" style="background-color:#0077b5;"></i>
+                                        <i class="fab fa-reddit icon" style="background-color:#ff4500 ;"></i>
+                                        <i class="fab fa-pinterest icon" style="background-color:#ca2127"></i>
+                                        <i class="fab fa-vk icon" style="background-color: #3b5999;"></i>
+                                        <i class="fab fa-instagram icon" style="background-color:#dd277b"></i>
+                                        <i class="fab fa-youtube icon" style="background-color: #db4a39;"></i>
+                                        <i class="fab fa-whatsapp icon" style="background-color: #3fbb50;"></i>
+                                        <i class="fas fa-rss icon" style="background-color: #ffc200;"></i>                               
+                                    </div>
+                                </div>
+
+                                <div class="popular-posts mt-5  text-center">
+                                    <h5 class="font-weight-bold" style="color: #19ddc4;">popular posts</h5>
+                                    <hr>
+                                    {% for post in latest_blogs %}
+                                        <div class="post d-flex">
+                                            <div class="post-img mt-3">
+                                                <img src="/media/{{post.blog_image}}" style="height: 60px; width: 75px;" alt="">
+                                            </div>
+                                            <div class="post-content">
+                                                <p>{{post.blog_title}}</p>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+
+                                <div class="youtube-channel mt-5  ">
+                                    <h5 class="font-weight-bold" style="color: #19ddc4;">Subscribe Us</h5>
+                                    <hr>
+                                    <iframe width="330" height="225" class="text-center"
+                                        src="https://www.youtube.com/embed/N_kQ2HG55iU">
+                                    </iframe>
+                                </div>
+
+                                <div class="fb-page mt-5">
+                                    <h5 class="font-weight-bold" style="color: #19ddc4;">Facebook</h5>
+                                    <hr>
+                                    <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fbeasteyegaming&tabs&width=350px&height=280px&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="350px" height="130px" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+                                </div>
+
+                                <div class="categories mt-3">
+                                    <h5 class="font-weight-bold" style="color: #19ddc4;">Categories</h5>
+                                    <hr>
+                                    <p class="categories"><i class="fas fa-chevron-right mr-1" style="font-size: 10px;"></i>Business</p>
+                                    <p class="categories"><i class="fas fa-chevron-right mr-1" style="font-size: 10px;"></i>Photography</p>
+                                    <p class="categories"><i class="fas fa-chevron-right mr-1" style="font-size: 10px;"></i>Sports</p>
+                                    <p class="categories"><i class="fas fa-chevron-right mr-1" style="font-size: 10px;"></i>Technology</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+{% endblock %}
